@@ -1,5 +1,7 @@
 package com.Jenkins.Report;
 
+import java.io.IOException;
+
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
@@ -9,11 +11,12 @@ import com.aventstack.extentreports.Status;
 public class ActitimeTests extends ActitimeExecute{
 	
 	@Test
-	public void create()
+	public void create() throws IOException
 	{
 		Reporter.log("Create",true);
 		ExtentTest test=extent.createTest("This test is for login").assignAuthor("Ricku").assignCategory("Smoke Test").
 assignDevice("HP");
+		spark.loadXMLConfig(conf);
 		test.log(Status.PASS,"This test case execute properly");
 		test.pass("This test case accept credential inputs");
 		test.info("It is showing password alerts");

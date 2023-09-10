@@ -1,5 +1,9 @@
 package com.Jenkins.Report;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,6 +21,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class ActitimeExecute {
 	ExtentReports extent=new ExtentReports();
 	ExtentSparkReporter spark=new ExtentSparkReporter("MyExtentReport.html");
+	File conf=new File("Extent_config.xml");
 	WebDriver driver;
 	@BeforeClass
 	public void open()
@@ -46,9 +51,10 @@ public class ActitimeExecute {
 		Reporter.log("Logout",true);
 	}
 	@AfterClass
-	public void close()
+	public void close() throws IOException
 	{
 		Reporter.log("Close",true);
 		extent.flush();
+		Desktop.getDesktop().browse(new File("MyextentReport.html").toURI());
 	}
 }
